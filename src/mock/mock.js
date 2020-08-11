@@ -13,6 +13,9 @@ var ratings = data.ratings;
 Mock.mock('/seller', 'get', () => {
   return seller;
 });
+Mock.mock('/goods', 'get', () => {
+  return goods;
+});
 // post请求,带参数,参数会在data中返回,会返回url,type,body三个参数,可以把data打印出来看看
 Mock.mock('http://localhost:8081/test/cityInfo', 'post', (data) => {
   // 请求传过来的参数在body中,传回的是json字符串,需要转义一下

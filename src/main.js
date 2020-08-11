@@ -3,9 +3,10 @@ import './cube-ui';
 import App from './App.vue';
 import router from './router';
 import store from './store';
-import './mock/mock.js'
+import '@/mock/mock.js'
 import axios from 'axios'
-import '../config/axios'
+import '@/mock/axios'
+// import './common/js/register'
 
 // 将axios挂载到Vue实例,在组件中可以直接使用
 Vue.prototype.$axios = axios
