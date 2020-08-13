@@ -26,7 +26,8 @@
           <ul>
             <li class="food-item"
                 v-for="(item,index) in item.foods"
-                :key="index">
+                :key="index"
+                @click="clickFood(item)">
               <div class="icon">
                 <img :src="item.icon"
                      width="57"
@@ -40,9 +41,9 @@
                   <samp>好评率{{item.rating}}%</samp>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{item.price}}</span>
+                  <span class="now">¥{{item.price}}</span>
                   <span class="old"
-                        v-show="item.oldPrice">￥{{item.oldPrice}}</span>
+                        v-show="item.oldPrice">¥{{item.oldPrice}}</span>
                 </div>
                 <div class="cartcontrol-wrapper">
                   <cartcontrol :food="item" />
@@ -53,9 +54,11 @@
         </li>
       </ul>
     </div>
-    <Shopcar ref="Shopcar" :deliveryPrice="seller.deliveryPrice"
+    <Shopcar :deliveryPrice="seller.deliveryPrice"
              :minPrice="seller.minPrice"
              :selectFoods="selectFoods" />
+    <food ref="food"
+          :food="selectFood" />
   </div>
 </template>
 
@@ -64,9 +67,9 @@ import supporticon from '@/components/support-ico/support-ico';
 import BScoll from 'better-scroll'
 import Shopcar from '@/components/shop-cart/shop-cart'
 import cartcontrol from '@/components/cartcontrol/cartcontrol'
+import food from '@/components/food/food'
 
 export default {
-
   props: {
     seller: {
       type: Object
@@ -77,10 +80,13 @@ export default {
       goods: {},
       listHeight: [],
       scrollY: 0,
-      key:'key'
+      key: 'key',
+      selectFood: {}
     }
   },
   created () {
+    this.storage = localStorage;
+
     this.$axios.get('/goods').then(res => {
       this.goods = res.data;
       this.$nextTick(() => {
@@ -113,6 +119,12 @@ export default {
     scrollGo (index) {
       this.foodsScroll.scrollToElement(this.$refs.foodListChild[index], 200)
     },
+    clickFood (item) {
+      this.selectFood = item;
+      console.log(this.selectFood);
+      this.$set(this.selectFood, "is", true)
+      this.$refs.food.creatScoll()
+    }
   },
   computed: {
     currentIndex () {
@@ -125,23 +137,28 @@ export default {
       }
       return 0;
     },
-    selectFoods(){
+    selectFoods () {
       let foods = [];
-      for(let index in this.goods){
-        for(let item of this.goods[index].foods){
-          if(item.count>0){
+      // if (this.storage.selectFoods) {
+      //   for (let index in this.goods) {
+      //     let storagefoods = JSON.parse(this.storage.selectFoods)
+      //   }
+      // }
+      for (let index in this.goods) {
+        for (let item of this.goods[index].foods) {
+          if (item.count > 0) {
             foods.push(item)
           }
         }
       }
       return foods;
     }
-
   },
   components: {
     supporticon,
     Shopcar,
-    cartcontrol
+    cartcontrol,
+    food
   }
 
 }

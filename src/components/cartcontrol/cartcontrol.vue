@@ -21,8 +21,14 @@ export default {
       type: Object
     }
   },
+  created(){
+    
+  },
   methods: {
-    addCart () {
+    addCart (e) {
+      if(!e._constructed){
+        return
+      }
       if (!this.food.count) {
         this.$set(this.food, 'count', 1)
       }
@@ -32,7 +38,7 @@ export default {
     },
     decreaseCart () {
       this.food.count--;
-    }
+    },
   }
 }
 </script>

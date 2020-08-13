@@ -1,4 +1,5 @@
 <template>
+<transition name="detail">
   <div class="detail">
     <div class="detail-wrapper clearfix">
       <div class="detail-main">
@@ -38,6 +39,7 @@
            @click="detailShow"></div>
     </div>
   </div>
+</transition>
 </template>
 
 <script>
@@ -77,6 +79,13 @@ export default {
   overflow auto
   background-color rgba(7, 17, 27, 0.8)
   color #fff
+  &.detail-enter-active, &.detail-leave-active
+    transition all 0.2s
+    opacity 1
+  &.detail-enter, &.detail-leave-to
+    transition all 0.2s
+    filter blur(15px)
+    opacity 0
   .detail-wrapper
     width 100%
     min-height 100%

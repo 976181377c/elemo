@@ -1,32 +1,48 @@
 <template>
   <div class="shop-cart">
     <div class="content">
-      <div class="content-left">
+      <div class="content-left"
+           @click="isfood()">
         <div class="logo-wrapper">
-          <div class="logo" :class="{'highlight':totalPrice>0}">
+          <div class="logo"
+               :class="{'highlight':totalPrice>0}">
             <i class="icon-shopping_cart"></i>
           </div>
           <div class="num"
                v-show="num">{{num}}</div>
         </div>
         <div class="price"
-             :class="{'highlight':totalPrice>0}">￥{{totalPrice}}元</div>
-        <div class="desc">另需配送费￥{{deliveryPrice}}元</div>
+             :class="{'highlight':totalPrice>0}">¥{{totalPrice}}元</div>
+        <div class="desc">另需配送费¥{{deliveryPrice}}元</div>
       </div>
       <div class="content-right">
-        <div class="pay" :class="{'highlight':totalPrice>=minPrice}">
+        <div class="pay"
+             :class="{'highlight':totalPrice>=minPrice}">
           {{payDesc}}
         </div>
       </div>
     </div>
+    <shopCartList v-show="listShow"
+                  ref="shopCartList"
+                  :selectFoods='selectFoods'
+                  :isfood='food' />
   </div>
 </template>
 
 <script>
+import cartcontrol from '@/components/cartcontrol/cartcontrol'
+import shopCartList from '@/components/shopCartList/shopCartList'
 
 
 export default {
 
+  data () {
+    return {
+      food: {
+        is: false
+      }
+    }
+  },
   props: {
     deliveryPrice: {
       type: Number,
@@ -40,8 +56,16 @@ export default {
     selectFoods: {
       type: Array,
       default () {
-        return[]
+        return []
       }
+    }
+  },
+  methods: {
+    isfood () {
+      if (this.num > 0) {
+        this.food.is = !this.food.is
+      }
+      this.$refs.shopCartList.scoll()
     }
   },
   computed: {
@@ -59,15 +83,27 @@ export default {
       }
       return count;
     },
-    payDesc(){
-      if(this.totalPrice ===0){
-        return `￥${this.minPrice}元起送`
-      }else if(this.totalPrice<this.minPrice){
-        return `还差￥${this.minPrice-this.totalPrice}起送`
-      }else{
+    payDesc () {
+      if (this.totalPrice === 0) {
+        return `¥${this.minPrice}元起送`
+      } else if (this.totalPrice < this.minPrice) {
+        return `还差¥${this.minPrice - this.totalPrice}起送`
+      } else {
         return "去结算"
       }
+    },
+    listShow () {
+      if (this.num == 0) {
+        this.food.is = false
+        return this.food.is
+      } else if (this.food.is) {
+        return true
+      }
     }
+  },
+  components: {
+    cartcontrol,
+    shopCartList
   }
 
 }
@@ -112,7 +148,7 @@ export default {
             color #fff
           .icon-shopping_cart
             line-height 44px
-            font-size 24px 
+            font-size 24px
         .num
           position absolute
           top 0
@@ -159,5 +195,4 @@ export default {
           background #00b43c
           color #fff
           font-size 14px
-
 </style>
