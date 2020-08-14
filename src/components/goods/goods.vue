@@ -184,7 +184,7 @@ export default {
       display table
       height 54px
       width 58px
-      margin  0px 12px
+      padding 0px 12px
       line-height 14px
       &.current
         position relative
