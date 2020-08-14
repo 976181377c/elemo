@@ -97,7 +97,10 @@ export default {
   },
   methods: {
     _initScroll () {
-      this.meunScroll = new BScoll('.menu-wrapper');
+      this.meunScroll = new BScoll('.menu-wrapper', {
+        mouseWheel: true,
+        click: true
+      });
       this.foodsScroll = new BScoll('.foods-wrapper', {
         probeType: 3,
         mouseWheel: true,
