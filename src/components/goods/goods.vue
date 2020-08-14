@@ -97,7 +97,9 @@ export default {
   },
   methods: {
     _initScroll () {
-      this.meunScroll = new BScoll('.menu-wrapper');
+      this.meunScroll = new BScoll('.menu-wrapper', {
+        click: true
+      });
       this.foodsScroll = new BScoll('.foods-wrapper', {
         probeType: 3,
         mouseWheel: true,
@@ -182,7 +184,7 @@ export default {
       display table
       height 54px
       width 58px
-      padding 0px 12px
+      margin  0px 12px
       line-height 14px
       &.current
         position relative
