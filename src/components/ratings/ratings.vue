@@ -50,7 +50,8 @@
                 <span class="delivery"
                       v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
               </div>
-              <p class="text">{{rating.text}}</p>
+              <p class="text">
+                {{rating.text}}</p>
               <div class="recommend"
                    v-show="rating.recommend && rating.recommend.length">
                 <span class="icon-thumb_up"></span>
@@ -74,6 +75,7 @@ import BScroll from 'better-scroll';
 import star from '@/components/star/star';
 import ratingSelect from '@/components/ratingSelect/ratingSelect';
 import split from '@/components/split/split';
+
 import moment from 'moment'
 
 const ALL = 2;
@@ -126,7 +128,6 @@ export default {
           return rating.rateType == this.selectType.type
         });
       }
-      console.log(obj);
       return obj
     }
   },
@@ -138,7 +139,7 @@ export default {
   components: {
     star,
     split,
-    ratingSelect
+    ratingSelect, 
   }
 };
 </script>

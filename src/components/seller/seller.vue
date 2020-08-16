@@ -41,16 +41,17 @@
       <split></split>
       <div class="bulletin">
         <h1 class="title">公告与活动</h1>
-        <div class="content-wrapper border-1px">
+        <div class="content-wrapper">
           <p class="content">{{seller.bulletin}}</p>
         </div>
         <ul v-if="seller.supports"
             class="supports">
-          <li class="support-item border-1px"
+          <li class="support-item"
               v-for="(item,index) in seller.supports"
               :key="index">
-            <span class="icon"
-                  :class="classMap[seller.supports[index].type]"></span>
+            <supporticon class="icon"
+                         :type="item.type"
+                         :size=3 />
             <span class="text">{{seller.supports[index].description}}</span>
           </li>
         </ul>
@@ -89,6 +90,8 @@
 import BScroll from 'better-scroll';
 import star from '@/components/star/star';
 import split from '@/components/split/split';
+import supporticon from '@/components/support-ico/support-ico';
+
 
 export default {
   props: {
@@ -101,26 +104,10 @@ export default {
       favorite: false,
     };
   },
-  created () {
-    this.$$nextTick(() => {
-      console.log(this.seller);
-    })
-  },
   computed: {
     favoriteText () {
       return this.favorite ? '已收藏' : '收藏';
     }
-  },
-  created () {
-    this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee'];
-  },
-  watch: {
-    // 'seller' () {
-    //   this.$nextTick(() => {
-    //     this._initScroll();
-    //     this._initPics();
-    //   });
-    // }
   },
   mounted () {
     this.$nextTick(() => {
@@ -165,7 +152,9 @@ export default {
   },
   components: {
     star,
-    split
+    split,
+    supporticon
+
   }
 };
 </script>
@@ -276,16 +265,6 @@ export default {
         margin-right 6px
         background-size 16px 16px
         background-repeat no-repeat
-        &.decrease
-          bg-image('decrease_4')
-        &.discount
-          bg-image('discount_4')
-        &.guarantee
-          bg-image('guarantee_4')
-        &.invoice
-          bg-image('invoice_4')
-        &.special
-          bg-image('special_4')
       .text
         line-height 16px
         font-size 12px

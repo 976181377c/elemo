@@ -56,7 +56,7 @@ export default {
   computed: {
     positives () {
       return this.ratings.filter((rating) => {
-        return rating.rateType === POSITIVE
+        return rating.rateType.type === POSITIVE
       })
     },
     negatives () {
