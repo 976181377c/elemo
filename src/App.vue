@@ -31,7 +31,7 @@ export default {
     this.$axios.get('/seller').then(res => {
       this.seller = res.data;
     })
-    this.go_link('goods')
+    // this.go_link('goods')
   },
   methods: {
     go_link (link_name) {
@@ -42,7 +42,6 @@ export default {
   components: {
     myheader
   }
-
 }
 </script>
 
