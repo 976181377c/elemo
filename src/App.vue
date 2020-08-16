@@ -13,7 +13,7 @@
            :class="{active:isActive=='seller'}">商家</div>
     </div>
     <div class="content">
-      <router-view :seller="seller"/>
+      <router-view :seller="seller" />
     </div>
 
   </div>
@@ -24,14 +24,14 @@ export default {
   data () {
     return {
       isActive: 'goods',
-      seller:{}
+      seller: {}
     }
   },
   created () {
     this.$axios.get('/seller').then(res => {
       this.seller = res.data;
     })
-    // this.go_link('goods')
+    this.go_link('goods')
   },
   methods: {
     go_link (link_name) {
