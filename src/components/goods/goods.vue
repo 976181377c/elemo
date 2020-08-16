@@ -85,7 +85,6 @@ export default {
     }
   },
   created () {
-    this.storage = localStorage;
 
     this.$axios.get('/goods').then(res => {
       this.goods = res.data;
