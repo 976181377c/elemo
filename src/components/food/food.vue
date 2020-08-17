@@ -84,7 +84,6 @@ import cartcontrol from '@/components/cartcontrol/cartcontrol'
 import split from '@/components/split/split'
 import ratingSelect from '@/components/ratingSelect/ratingSelect'
 import moment from 'moment'
-import rating from '../../../../vue-eleme-master/src/common/mixins/rating';
 
 const POSITIVE = 0
 const NEGATIVE = 1
