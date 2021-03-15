@@ -1,4 +1,4 @@
-# 预览(https://976181377c.github.io/goods)
+# [预览](https://976181377c.github.io/elemo)
 
 ## Project setup
 ```
@@ -14,6 +14,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
